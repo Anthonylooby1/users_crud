@@ -31,3 +31,29 @@ class Users:
         VALUES (%(first_name)s,%(last_name)s,%(email)s)
         """
         return connectToMySQL(DATABASE).query_db(query,data)
+    
+    @classmethod 
+    def get_one(cls,data):
+        query = """
+            SELECT * FROM users WHERE id = %(id)s
+        """
+        results = connectToMySQL(DATABASE).query_db(query,data)
+        if results:
+            dog_instance = cls(results[0])
+            return dog_instance
+        return results    
+    
+    @classmethod
+    def update(cls,data):
+        query = """
+            UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s
+            WHERE users.id = %(id)s
+        """
+        return connectToMySQL(DATABASE).query_db(query,data)
+    
+    @classmethod
+    def delete(cls,data):
+        query = """
+            DELETE FROM users WHERE id = %(id)s
+        """
+        return connectToMySQL(DATABASE).query_db(query,data)

@@ -8,7 +8,7 @@
 <body>
     <h1>All Users</h1>
     {% for one_user in all_users %}
-        <p>{{one_user.first_name}} Last Name {{one_user.last_name}} Email {{one_user.email}}</p>
+        <p> {{one_user.first_name}}</a> Last Name {{one_user.last_name}} Email {{one_user.email}} | <a href="/users/{{one_user.id}}/edit">Edit</a> | <a href="/users/{{one_user.id}}/delete">Delete</a> | <a href="/users/{{one_user.id}}/view">Show</a></p>
     {% endfor %}
     <a href='/users/new'>Add A User</a>
 </body>

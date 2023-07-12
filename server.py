@@ -21,6 +21,41 @@ def create_user():
     Users.create(request.form)
     return redirect('/users')
 
+@app.route('/users/<int:id>/view')
+def view_one_user(id):
+    data = {
+        'id': id
+    }
+    one_user = Users.get_one(data)
+    return render_template("user_one.html", one_user=one_user)
+
+@app.route('/users/<int:id>/edit')
+def edit_user_form(id):
+    data = {
+        'id': id
+    }
+    one_user = Users.get_one(data)
+    return render_template('user_edit.html', one_user=one_user)
+
+@app.route('/users/<int:id>/update', methods=['POST'])
+def update_user(id):
+    data = {
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+        'email': request.form['email'],
+        'id': id
+    }
+    Users.update(data)
+    return redirect('/users')
+
+@app.route('/users/<int:id>/delete')
+def delete_user(id):
+    data = {
+        'id': id
+    }
+    Users.delete(data)
+    return redirect('/users')
+
 
 
 
